@@ -1,0 +1,23 @@
+.form {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form input[type="text"] {
+  font-size: 1.5rem;
+  min-width: 88%;
+  padding: 0 1rem;
+  border: 0.1rem solid #ccc;
+  background-color: gainsboro;
+}
+
+.form button[type="submit"] {
+  border: none;
+  height: 1.9rem;
+  width: 1.9rem;
+  background-color: mediumseagreen;
+  color: #fff;
+  margin: 0 0 0 0.5rem;
+}
