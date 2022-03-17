@@ -1,30 +1,31 @@
 import React, { Component } from "react";
-
 import Form from './Form';
 import Tarefas from './Tarefas';
-
 import './Main.css';
 
 export default class Main extends Component {
 
     state = {
       novaTarefa: '',
+      concluidos: [],
       tarefas: [],
-      index: -1,
+      index: -1
     };
 
     componentDidMount() {
       const tarefas = JSON.parse(localStorage.getItem('tarefas'));
-
+      const concluidos = JSON.parse(localStorage.getItem('concluidos'));
       if(!tarefas) return;
-      this.setState({ tarefas });
+      this.setState({ tarefas, concluidos });
     }
 
     componentDidUpdate(prevProps, prevState) {
-      const { tarefas } = this.state;
+      const { tarefas, concluidos } = this.state;
 
-      if(tarefas === prevState.tarefas) return;
+      if(tarefas === prevState.tarefas && concluidos === prevState.concluidos) return;
+
        localStorage.setItem('tarefas', JSON.stringify(tarefas));
+       localStorage.setItem('concluidos', JSON.stringify( concluidos));
     }
 
 
@@ -51,9 +52,6 @@ export default class Main extends Component {
           novaTarefa:'',
         })
       }
-
-
-
   }
 
   handleChange = (e) => {
@@ -80,8 +78,22 @@ export default class Main extends Component {
     })
   }
 
+  handleCheckbox = (e, index) => {
+    const { concluidos } = this.state;
+    const existe = concluidos.some(item => item === index);
+    if(existe) {
+      this.setState({
+        concluidos: concluidos.filter(item => item !== index)
+      });
+    }else {
+      this.setState({
+        concluidos: [...concluidos, index]
+      });
+    }
+  }
+
   render() {
-    const { novaTarefa, tarefas } = this.state;
+    const { novaTarefa, tarefas, concluidos } = this.state;
 
     return (
       <div className="main">
@@ -94,10 +106,13 @@ export default class Main extends Component {
       />
 
       <Tarefas
+        concluidos={concluidos}
+        handleCheckbox={this.handleCheckbox}
         tarefas={tarefas}
         handleEdit={this.handleEdit}
         handleDelete={this.handleDelete}
       />
+
 
       </div>
     );

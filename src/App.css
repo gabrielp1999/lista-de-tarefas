@@ -14,3 +14,14 @@ button {
   cursor: pointer;
 }
 
+.checkbox {
+  height: 1.4rem;
+  width: 1.4rem;
+  margin: 0 0.7rem;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+  border: 2px solid green;
+}
+

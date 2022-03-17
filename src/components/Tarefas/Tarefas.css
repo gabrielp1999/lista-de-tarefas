@@ -12,7 +12,7 @@
 }
 
 .tarefas li:hover {
-  background-color: darkgrey;
+  background-color: rgba(159, 120, 240, 0.2);
 }
 
 .edit, .delete {
@@ -30,13 +30,6 @@
   color: #f04c64;
 }
 
-.tarefas li:hover .edit {
-  color: black;
-}
-
-.tarefas li:hover .delete {
-  color: black;
-}
 
 .tarefas li .edit,
 .tarefas li .delete {
