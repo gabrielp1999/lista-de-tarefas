@@ -9,7 +9,8 @@ export default class Main extends Component {
       novaTarefa: '',
       concluidos: [],
       tarefas: [],
-      index: -1
+      index: -1,
+      isChecked: false
     };
 
     componentDidMount() {
@@ -33,6 +34,12 @@ export default class Main extends Component {
       e.preventDefault();
       const { tarefas, index } = this.state;
       let { novaTarefa } = this.state;
+
+      if(novaTarefa.length === 0 ){
+        return;
+      }
+
+
       novaTarefa = novaTarefa.trim();
 
       if(tarefas.indexOf(novaTarefa) !== -1) return;
@@ -52,6 +59,8 @@ export default class Main extends Component {
           novaTarefa:'',
         })
       }
+
+      this.state.isChecked = false;
   }
 
   handleChange = (e) => {
@@ -93,7 +102,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { novaTarefa, tarefas, concluidos } = this.state;
+    const { novaTarefa, tarefas, concluidos, isChecked } = this.state;
 
     return (
       <div className="main">
@@ -111,6 +120,7 @@ export default class Main extends Component {
         tarefas={tarefas}
         handleEdit={this.handleEdit}
         handleDelete={this.handleDelete}
+        isChecked={isChecked}
       />
 
 
